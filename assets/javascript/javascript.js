@@ -71,7 +71,7 @@ function displayGameInfo() {
                     //if (results[i].rating !== "g" && results[i].rating !== "pg-13") {
                     // Creating a div with the class "item"
                     gifDiv = $("<div>");
-                    gifDiv.addClass("still");
+                    
                     var im = results[i].images;
 
                     // Storing the result item's rating
@@ -82,19 +82,24 @@ function displayGameInfo() {
 
                     // Creating an image tag
                     personImage = $("<img>");
-
+                    personImage.addClass("still");
                     // Giving the image tag an src attribute of a proprty pulled off the
                     // result item
-                    personImage.attr("src", im.fixed_width_still.url);
+                    personImage.attr({"src" : im.fixed_width_still.url, "data-url": im.fixed_width.url});
 
                     // Appending the paragraph and personImage we created to the "gifDiv" div we created
                     gifDiv.append(p);
                     gifDiv.append(personImage);
 
-                    $('.still').on("click", function(event) {
+                    
                         //event.stopPropagation();
-                        personImage.attr("src", im.fixed_width.url);
-                        $(this).append(personImage);
+                        $(document).on("click", ".still", function() { 
+                        var tempImage = $(this).attr("src");
+                            $(this).attr("src", $(this).attr("data-url"));
+                            $(this).attr("data-url", tempImage);
+                        
+                        
+                        //$(this).append(personImage);
                     });
 
                     // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
