@@ -92,7 +92,7 @@ function displayGameInfo() {
                     gifDiv.append(personImage);
 
                     $('.still').on("click", function(event) {
-                        event.stopPropagation();
+                        //event.stopPropagation();
                         personImage.attr("src", im.fixed_width.url);
                         $(this).append(personImage);
                     });
